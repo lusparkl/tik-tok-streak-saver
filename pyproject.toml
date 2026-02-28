@@ -1,15 +1,16 @@
 [project]
-name = "tik-tok-streak-saver"
+name = "streak-saver"
 version = "0.1.0"
 description = "Hello CLI"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "playwright>=1.58.0",
-    "typer=>0.24.1 "
+    "typer=>0.24.1 ",
+    "autostarter>=0.0.2"
 ]
 
 [project.scripts]
-hello = "hello.hello:cli"
+streak-saver = "main:app"
 
 [build-system]
 requires = ["flit_core<4"]
