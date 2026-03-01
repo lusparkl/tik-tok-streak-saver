@@ -2,6 +2,7 @@ import typer
 import json
 from playwright.sync_api import sync_playwright
 from pathlib import Path
+from streak_saver.modules.utils import send_script_message, send_error_message, send_success_message
 
 app = typer.Typer()
 
@@ -17,7 +18,8 @@ def login():
         
         page.goto("https://www.tiktok.com/")
         page.wait_for_timeout(5000)
-        res = input("Press enter to continue(only if you logged in)")
+        send_success_message("Press enter to continue(only if you logged in)")
+        res = input(" ")
         page.wait_for_timeout(10000)
         
         cookies = page.context.cookies()
@@ -27,8 +29,9 @@ def login():
         Path.touch(cookies_path)
         
         if not cookies:
-            typer.echo("Something wrong, cookies is empty. Try again please and don't forget to allow cookies!")
+            send_error_message("Something wrong, cookies is empty. Try again please and don't forget to allow cookies.")
         else:
             with open(cookies_path, 'w') as f:
                 json.dump(cookies, f)
         browser.close()
+        send_success_message("Saved cookies!")

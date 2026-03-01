@@ -1,4 +1,4 @@
-from streak_saver.modules.utils import get_config, save_config
+from streak_saver.modules.utils import get_config, save_config, send_error_message, send_script_message, send_success_message
 import typer
 
 app = typer.Typer()
@@ -15,11 +15,11 @@ def add_user(username: str):
     """
     config = get_config()
     if username in config["users"].keys():
-        typer.echo("User is already in your list!")
+        send_error_message("User is already in your list.")
     else:
         config["users"][username] = "❤️"
         save_config(config)
-        typer.echo("Added user!")
+        send_success_message(f"Added user {username}.")
 
 @app.command("delete_user")
 def delete_user(username: str):
@@ -33,11 +33,11 @@ def delete_user(username: str):
     """
     config = get_config()
     if username not in config["users"].keys():
-        typer.echo("Can't find anyone with this username:(")
+        send_error_message("Can't find anyone with this username:(")
     else:
         del config["users"][username]
         save_config(config)
-        typer.echo("Deleted user!")
+        send_success_message("Deleted user.")
 
 @app.command("show_users")
 def show_users():
@@ -49,9 +49,9 @@ def show_users():
         names_str = "There is all your friends: - "
         for name in config["users"].keys():
             names_str += f"{name}: {config['users'][name]} -"
-        typer.echo(names_str)
+        send_script_message(names_str)
     else:
-        typer.echo("Your users list is emty, but you can fix that by using <streak-saver add_user USERNAME>!")
+        send_error_message("Your users list is emty, but you can fix that by using <streak-saver add_user USERNAME>.")
 
 @app.command("change_default_message")
 def change_default_message(new_message: str):
@@ -68,12 +68,12 @@ def change_default_message(new_message: str):
         for username in config["users"].keys():
             config["users"][username] = new_message
         
-        typer.echo(f"Successfuly changed default message to the {new_message}.")
+        send_success_message(f"Successfuly changed default message to the {new_message}.")
     else:
-        typer.echo("Your friends list is empty. Use <streak-saver add_user USERNAME> to add them!")
+        send_error_message("You don't have users in your list yet. Use <streak-saver add_user USERNAME> to change that.")
 
-@app.command("change_default_message_for")
-def change_default_message_for_user(username: str, new_message: str):
+@app.command("change_message_for")
+def change_message_for_user(username: str, new_message: str):
     """
     Change default message for one user from your list.
 
@@ -87,6 +87,6 @@ def change_default_message_for_user(username: str, new_message: str):
     try:
         if config["users"][username]:
             config["users"][username] = new_message
-            typer.echo(f"Successfuly changed default message for {username} to {new_message}.")
+            send_success_message(f"Successfuly changed default message for {username} to {new_message}.")
     except KeyError:
-        typer.echo(f"Can't find user with nickname {username}, recheck it and try again.")
+        send_error_message(f"Can't find user with nickname {username}, recheck it and try again.")

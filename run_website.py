@@ -12,10 +12,6 @@ app = typer.Typer()
 def send_messages():
     cookies = get_cookies()
     config = get_config()
-    
-    if config["SETTINGS"]["last_send"] == str(date.today()):
-        send_script_message("Already send messages today.")
-        return
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False, args=["--disable-blink-features=AutomationControlled"])
@@ -28,16 +24,9 @@ def send_messages():
 
         for username in config["users"].keys():
             page.wait_for_timeout(2000)
-            try:
-                page.locator("span").get_by_text(username, exact=True).first.click()
-                page.get_by_label("Send a message...", exact=True).first.fill(config["users"][username], timeout=10000)
-                page.wait_for_timeout(500)
-                page.locator('[data-e2e="message-send"]').click()
-                send_script_message(f"Sent message to the {username}")
-            except:
-                send_error_message(f"Something happened while trying to send message to the {username}. Recheck nickname please.")
-        
-        config["SETTINGS"]["last_send"] == str(date.today())
-        send_success_message("Sending complete.")
+            page.locator("span").get_by_text(username, exact=True).first.click()
 
 
+
+
+send_messages()
