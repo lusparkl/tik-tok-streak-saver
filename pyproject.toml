@@ -1,16 +1,16 @@
 [project]
-name = "streak-saver"
+name = "streak_saver"
 version = "0.1.0"
 description = "Hello CLI"
 requires-python = ">=3.12"
 dependencies = [
     "playwright>=1.58.0",
-    "typer=>0.24.1 ",
+    "typer>=0.24.1 ",
     "autostarter>=0.0.2"
 ]
 
 [project.scripts]
-streak-saver = "main:app"
+streak-saver = "streak_saver.main:app"
 
 [build-system]
 requires = ["flit_core<4"]

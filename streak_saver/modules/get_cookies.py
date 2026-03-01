@@ -21,8 +21,11 @@ def login():
         page.wait_for_timeout(10000)
         
         cookies = page.context.cookies()
-        app_dir = typer.get_app_dir("streak-saver")
+        app_dir = typer.get_app_dir("streak_saver")
         cookies_path = Path(app_dir) / "cookies.json"
+        cookies_path.parent.mkdir(parents=True, exist_ok=True)
+        Path.touch(cookies_path)
+        
         if not cookies:
             typer.echo("Something wrong, cookies is empty. Try again please and don't forget to allow cookies!")
         else:

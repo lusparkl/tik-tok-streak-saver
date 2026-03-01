@@ -4,17 +4,19 @@ import shutil
 
 app = typer.Typer()
 
-@app.command("on")
+@app.command("autostart_on")
 def enable_autostart():
-    path = shutil.which("streak-saver")
+    """Enable autostart"""
+    path = shutil.which("streak_saver")
 
     if path:
-        autostarter.add(path, identifier="streak-saver")
+        autostarter.add(path, identifier="streak_saver")
         typer.echo("Autostart enabled!")
     else:
         typer.echo("Can't find script path, try to setup and try again.")
 
-@app.command("off")
+@app.command("autostart_off")
 def disable_autostart():
-    autostarter.remove(identifier="streak-saver")
+    """Disable autostart"""
+    autostarter.remove(identifier="streak_saver")
     typer.echo("Disabled autostart!")
