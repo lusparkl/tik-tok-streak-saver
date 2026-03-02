@@ -1,7 +1,9 @@
 [project]
 name = "streak_saver"
-version = "0.1.0"
-description = "Hello CLI"
+version = "0.1.1"
+description = "CLI app that automatically messages your friends on the tik tok and saves your streak."
+readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.12"
 dependencies = [
     "playwright>=1.58.0",

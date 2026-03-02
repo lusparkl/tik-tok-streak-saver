@@ -1,4 +1,4 @@
-from streak_saver.modules.utils import get_config, save_config, send_error_message, send_script_message, send_success_message
+from streak_saver.modules.utils import get_config, save_config, send_error_message, send_script_message, send_success_message, get_user_message
 import typer
 
 app = typer.Typer()
@@ -8,7 +8,7 @@ def add_user(username: str):
     """
     Add user to your users list.
 
-    Add user to your users list to send automatical messages to them. Gives default message "❤️" automatically.
+    Add user to your users list to send automatical messages to them. Uses default message unless you change it.
 
     Attributes:
         username (str): Exact username of the person who you wanna add.
@@ -17,7 +17,7 @@ def add_user(username: str):
     if username in config["users"].keys():
         send_error_message("User is already in your list.")
     else:
-        config["users"][username] = "❤️"
+        config["users"][username] = ""
         save_config(config)
         send_success_message(f"Added user {username}.")
 
@@ -48,7 +48,7 @@ def show_users():
     if config["users"]:
         names_str = "There is all your friends: - "
         for name in config["users"].keys():
-            names_str += f"{name}: {config['users'][name]} -"
+            names_str += f"{name}: {get_user_message(config['users'][name])} - "
         send_script_message(names_str)
     else:
         send_error_message("Your users list is emty, but you can fix that by using <streak-saver add_user USERNAME>.")
@@ -58,26 +58,22 @@ def change_default_message(new_message: str):
     """
     Change default messages for all users in your list.
 
-    Doesn't affect new users and can rewrite your custom messages for some users.
-
     Attributes:
         new_message (str): Messages that you want to send automatically.
     """
-    config = get_config()
-    if config["users"]:
-        for username in config["users"].keys():
-            config["users"][username] = new_message
-        
-        send_success_message(f"Successfuly changed default message to the {new_message}.")
+    if new_message.strip():
+        config = get_config()
+        config["SETTINGS"]["default_message"] = new_message
+        send_success_message(f"Changed default message to {new_message}")
+        save_config(config)
     else:
-        send_error_message("You don't have users in your list yet. Use <streak-saver add_user USERNAME> to change that.")
+        send_error_message("Please provide not empty new message")
+
 
 @app.command("change_message_for")
 def change_message_for_user(username: str, new_message: str):
     """
     Change default message for one user from your list.
-
-    Can be rewritten by <change_default_message>.
 
     Attributes:
         username (str): Exact username of the user.
@@ -87,6 +83,7 @@ def change_message_for_user(username: str, new_message: str):
     try:
         if config["users"][username]:
             config["users"][username] = new_message
+            save_config(config)
             send_success_message(f"Successfuly changed default message for {username} to {new_message}.")
     except KeyError:
         send_error_message(f"Can't find user with nickname {username}, recheck it and try again.")

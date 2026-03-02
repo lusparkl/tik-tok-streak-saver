@@ -1,15 +1,19 @@
-import typer
-import json
+from streak_saver.modules.utils import get_cookies, get_config, send_error_message, send_script_message, send_success_message, get_user_message
 from playwright.sync_api import sync_playwright
 from pathlib import Path
-from streak_saver.modules.utils import get_cookies, get_config, send_error_message, send_script_message, send_success_message
 from datetime import date
+import typer
+import json
+
 
 
 app = typer.Typer()
 
 @app.command("send_messages")
 def send_messages():
+    """
+    Send messages to all people from the list. With autostart on runs automatically. Runs only once a day.
+    """
     cookies = get_cookies()
     config = get_config()
     
@@ -30,7 +34,7 @@ def send_messages():
             page.wait_for_timeout(2000)
             try:
                 page.locator("span").get_by_text(username, exact=True).first.click()
-                page.get_by_label("Send a message...", exact=True).first.fill(config["users"][username], timeout=10000)
+                page.get_by_label("Send a message...", exact=True).first.fill(get_user_message(config["users"][username]), timeout=10000)
                 page.wait_for_timeout(500)
                 page.locator('[data-e2e="message-send"]').click()
                 send_script_message(f"Sent message to the {username}")

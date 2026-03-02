@@ -1,9 +1,9 @@
 from streak_saver.modules.utils import send_error_message, send_script_message, send_success_message
-import typer
-import subprocess
-import sys
 from pathlib import Path
 import configparser
+import subprocess
+import typer
+import sys
 
 app = typer.Typer()
 
@@ -19,7 +19,8 @@ def setup():
     config = configparser.ConfigParser()
     config["users"] = {}
     config.add_section("SETTINGS")
-    config["SETTINGS"]["last_send"] = ""
+    config["SETTINGS"]["last_send"] = " "
+    config["SETTINGS"]["default_message"] = "❤️"
     app_dir = typer.get_app_dir("streak_saver")
     config_path = Path(app_dir) / "config.ini"
     config_path.parent.mkdir(parents=True, exist_ok=True)
@@ -33,7 +34,7 @@ def setup():
                 send_script_message("Already have this one!")
                 continue
             else:
-                config["users"][name] = "❤️"
+                config["users"][name] = ""
                 continue
         
         break

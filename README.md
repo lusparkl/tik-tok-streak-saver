@@ -15,10 +15,10 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 
 ## How to use
 
-1. Install package by running `pip install streak_saver` (I haven't published yet btw)
+1. Install package by running `pipx install streak_saver`.
 2. Run `streak-saver setup` it'll download playwright deps and create config files. You can also add your friends on this step.
 3. Run `streak-saver login` you'll find out browser page with tik tok in there, you need to login to your account once to save cookies. Your data will stay on your pc, no worries.
-4. Run `streak-saver autostart_on` to turn run script every time you start your pc(to disable it run `autostart_off`).
+4. Run `streak-saver autostart --on` to turn run script every time you start your pc(to disable it run `autostart --off`).
 
 **Done!** Now you can either forget about it or use some of the commands lower to customize your messages and to add/remove users who you wanna message.
 
@@ -29,11 +29,12 @@ I have lot's of friends who really do care about tik tok streak pets and there w
  - `add_user USERNAME` - add user to your "users list"(people who you'll be messaging). Use username not nickname!
  - `delete_user USERNAME` - delete user from your users list.
  - `show_users` - show nicknames and messages that you're senging from the users list.
- - `change_default_message MESSAGE` - change default message for all people from the list(by default it's ❤️).
+ - `change_default_message MESSAGE` - change default message(by default it's ❤️).
  - `change_message_for USERNAME MESSAGE` - change message for specific user from your users list.
  - `send_messages` - to send messages for all users from your list(with autostart on runs automatically). Runs only once a day.
  - `setup` - use only after you download package or if package files corrupted. 
  - `login` - use to renew cookies/change account. Necessary before first `send_messages`.
+ - `autostart --on/--off` - use to manage autostart
 
  ## Bugs
 

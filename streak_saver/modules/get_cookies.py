@@ -1,8 +1,9 @@
-import typer
-import json
+from streak_saver.modules.utils import send_script_message, send_error_message, send_success_message
 from playwright.sync_api import sync_playwright
 from pathlib import Path
-from streak_saver.modules.utils import send_script_message, send_error_message, send_success_message
+import typer
+import json
+
 
 app = typer.Typer()
 

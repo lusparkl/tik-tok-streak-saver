@@ -1,16 +1,17 @@
-from pathlib import Path
-import configparser
-import typer
-import json
 from playwright.sync_api import sync_playwright
 from rich.text import Text
+from pathlib import Path
+import configparser
 from rich import print
+import typer
+import json
 
 
 def get_config() -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     app_dir = typer.get_app_dir("streak_saver")
     config_path = Path(app_dir) / "config.ini"
+    config.optionxform = str
     
     try:
         config.read(config_path, encoding='utf-8')
@@ -46,3 +47,10 @@ def send_success_message(text: str) -> None:
 def send_error_message(text: str) -> None:
     message = Text(text, style="bold red")
     print(message)
+
+def get_user_message(user_message) -> str:
+    if not user_message.strip():
+        config = get_config()
+        return config["SETTINGS"]["default_message"]
+    else:
+        return user_message
