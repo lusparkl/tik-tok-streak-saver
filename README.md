@@ -26,16 +26,16 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 
 ## Commands
 
- - `add_user USERNAME` - add user to your "users list"(people who you'll be messaging). Use username not nickname!
- - `delete_user USERNAME` - delete user from your users list.
- - `show_users` - show nicknames and messages that you're senging from the users list.
- - `change_default_message MESSAGE` - change default message(by default it's ❤️).
- - `change_message_for USERNAME MESSAGE` - change message for specific user from your users list.
- - `send_messages` - to send messages for all users from your list(with autostart on runs automatically). Runs only once a day.
- - `setup` - use only after you download package or if package files corrupted. 
- - `login` - use to renew cookies/change account. Necessary before first `send_messages`.
- - `autostart --on/--off` - use to manage autostart
+- `setup` - use only after you download package or if package files corrupted. 
+- `login` - use to renew cookies/change account. Necessary before first `send_messages`.
+- `add_user USERNAME` - add user to your "users list"(people who you'll be messaging). Use username not nickname!
+- `delete_user USERNAME` - delete user from your users list.
+- `show_users` - show nicknames and messages that you're senging from the users list.
+- `change_default_message MESSAGE` - change default message(by default it's ❤️).
+- `change_message_for USERNAME MESSAGE` - change message for specific user from your users list.
+- `send_messages` - to send messages for all users from your list(with autostart on runs automatically). Runs only once a day.
+- `autostart --on/--off` - use to manage autostart
 
  ## Bugs
 
- If you found bug, please let me know about it by opening issue in the tab above🙏
+ If you found bug, please let me know about it by opening issue in github repository🙏

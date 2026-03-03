@@ -22,7 +22,7 @@ def send_messages():
         return
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, args=["--disable-blink-features=AutomationControlled"])
+        browser = p.chromium.launch(args=["--disable-blink-features=AutomationControlled"])
         browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
         page = browser.new_page()
         page.context.add_cookies(cookies)
@@ -33,7 +33,7 @@ def send_messages():
         for username in config["users"].keys():
             page.wait_for_timeout(2000)
             try:
-                page.locator("span").get_by_text(username, exact=True).first.click()
+                page.locator("span").get_by_text(username).first.click()
                 page.get_by_label("Send a message...", exact=True).first.fill(get_user_message(config["users"][username]), timeout=10000)
                 page.wait_for_timeout(500)
                 page.locator('[data-e2e="message-send"]').click()

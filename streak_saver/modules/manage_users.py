@@ -81,7 +81,7 @@ def change_message_for_user(username: str, new_message: str):
     """
     config = get_config()
     try:
-        if config["users"][username]:
+        if not config["users"][username]:
             config["users"][username] = new_message
             save_config(config)
             send_success_message(f"Successfuly changed default message for {username} to {new_message}.")

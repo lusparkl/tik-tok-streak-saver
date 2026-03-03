@@ -11,8 +11,7 @@ def get_config() -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     app_dir = typer.get_app_dir("streak_saver")
     config_path = Path(app_dir) / "config.ini"
-    config.optionxform = str
-    
+
     try:
         config.read(config_path, encoding='utf-8')
         return config
