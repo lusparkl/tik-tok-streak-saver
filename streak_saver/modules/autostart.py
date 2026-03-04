@@ -1,5 +1,5 @@
 from streak_saver.modules.utils import send_error_message, send_success_message, send_script_message
-import autostarter
+from pyautostart import SmartAutostart
 import typer
 import shutil
 
@@ -10,17 +10,24 @@ def autostart(
     on: bool = typer.Option(None, "--on", help="Enable autostart"),
     off: bool = typer.Option(None, "--off", help="Disable autostart")
 ):
-    "Manage autostart"
+    """Manage autostart"""
+
+    path = shutil.which("streak-saver")
+    autostart = SmartAutostart()
+    options = {
+        "args": [
+            path
+        ]
+    }
+    
     if on:
-        path = shutil.which("streak-saver")
         if path:
-            autostarter.add(path, arguments="send_messages --headless", identifier="streak_saver")
-            send_success_message("Autostart enabled🚀")
+            autostart.enable(name="streak-saver", options=options)
+            send_success_message("Autostart is on🚀")
         else:
             send_error_message("Can't find script path, try to setup and try again.")
-
     else:
-        autostarter.remove(identifier="streak_saver")
+        autostart.disable(name="streak-saver")
         send_success_message("Disabled autostart⛔")
 
 

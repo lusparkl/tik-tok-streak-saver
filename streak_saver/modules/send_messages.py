@@ -16,10 +16,16 @@ def send_messages():
     """
     cookies = get_cookies()
     config = get_config()
+
+    if not cookies or not config:
+        send_error_message("You haven't setup your app yet. Please use <streak-saver setup> and <streak-saver login> to use it")
     
     if config["SETTINGS"]["last_send"] == str(date.today()):
         send_script_message("Already send messages today.")
         return
+    
+    if not config["users"]:
+        send_error_message("There is no one to send messages. Add users with <streak-saver add_user USERNAME>")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(args=["--disable-blink-features=AutomationControlled"])

@@ -8,7 +8,7 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 
 * [Typer](https://typer.tiangolo.com/) - to realize CLI functionality.
 * [Playwright](https://playwright.dev/python/) - to interact with tik tok via browser.
-* [Autostarter](https://github.com/ctrlsam/autostarter) - to start app every time you turn on your pc.
+* [PyAutostart](https://pypi.org/project/pyautostart/) - to start app every time you turn on your pc.
 * [Rich](https://rich.readthedocs.io/en/stable/index.html) - to make prints prettier.
 
 ---
@@ -35,7 +35,7 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 - `change_message_for USERNAME MESSAGE` - change message for specific user from your users list.
 - `send_messages` - to send messages for all users from your list(with autostart on runs automatically). Runs only once a day.
 - `autostart --on/--off` - use to manage autostart
-
+- `streak-saver` - btw it runs `send_messages` command by default, it's for autostart feature
  ## Bugs
 
  If you found bug, please let me know about it by opening issue in github repository🙏

@@ -8,7 +8,7 @@ requires-python = ">=3.12"
 dependencies = [
     "playwright>=1.58.0",
     "typer>=0.24.1 ",
-    "autostarter>=0.0.2"
+    "pyautostart>=0.1.2"
 ]
 
 [project.scripts]
