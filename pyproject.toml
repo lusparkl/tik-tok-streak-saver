@@ -1,6 +1,6 @@
 [project]
 name = "streak_saver"
-version = "0.1.5"
+version = "0.1.6"
 description = "CLI app that automatically messages your friends on the tik tok and saves your streak."
 readme = "README.md"
 license = {file = "LICENSE"}

@@ -16,9 +16,13 @@ app.add_typer(users_app)
 app.add_typer(autostart_app)
 app.add_typer(send_messages_app)
 
+
 @app.callback(invoke_without_command=True)
-def callback():
-    typer.run(send_messages) #Callback to implement autostart
+def callback(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        send_messages()
+    else:
+        pass
 
 if __name__ == "__main__":
     app()
