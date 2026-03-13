@@ -22,6 +22,8 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 
 **Done!** Now you can either forget about it or use some of the commands lower to customize your messages and to add/remove users who you wanna message.
 
+**Warning**: You should run <streak-saver login> from time to time to renew your cookies. Something like once a week will be enough.
+
 ---
 
 ## Commands
