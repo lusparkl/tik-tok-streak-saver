@@ -15,6 +15,7 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 
 ## How to use
 
+!**Works with python <3.14 because playwright don't support 3.14 yet**
 1. Install package by running `pipx install streak_saver`.
 2. Run `streak-saver setup` it'll download playwright deps and create config files. You can also add your friends on this step.
 3. Run `streak-saver login` you'll find out browser page with tik tok in there, you need to login to your account once to save cookies. Your data will stay on your pc, no worries.
