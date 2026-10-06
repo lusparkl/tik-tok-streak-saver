@@ -38,6 +38,21 @@ I have lot's of friends who really do care about tik tok streak pets and there w
 - `send_messages` - to send messages for all users from your list(with autostart on runs automatically). Runs only once a day.
 - `autostart --on/--off` - use to manage autostart
 - `streak-saver` - btw it runs `send_messages` command by default, it's for autostart feature
+
+Successful sends are saved for each recipient. If any recipient fails, the command
+reports the underlying error and exits with a nonzero status. Run
+`streak-saver send_messages` again to retry failed recipients; friends already
+sent a message today will be skipped. The day is marked complete only after all
+recipients succeed. Browser confirmation means the message editor cleared the
+draft; it does not guarantee delivery to the recipient.
+
+For development, install the local package with `python -m pip install -e .`,
+install Chromium with `python -m playwright install chromium`, then run
+`python -m unittest discover -s tests -v`. Browser tests use locally routed HTML
+and never send TikTok messages. They use system `chromium` when available, or the
+Playwright browser otherwise; set `STREAK_SAVER_TEST_BROWSER_PATH` to select a
+specific browser executable.
+
  ## Bugs
 
  If you found bug, please let me know about it by opening issue in github repository🙏
